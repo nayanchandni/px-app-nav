@@ -353,8 +353,7 @@
     },
 
     _handleMouseEnter() {
-      if (!this.vertical) return;
-      if (this.verticalExpanded) return;
+      if (!this.vertical || this.verticalExpanded) return;
 
       this._mouseIsOverNav = true;
       if (this.isDebouncerActive('close-nav-on-mouseleave')) {
@@ -366,8 +365,7 @@
     },
 
     _handleMouseLeave() {
-      if (!this.vertical) return;
-      if (this.verticalExpanded) return;
+      if (!this.vertical || this.verticalExpanded) return;
 
       this._mouseIsOverNav = false;
       this.debounce('close-nav-on-mouseleave', function() {
@@ -408,15 +406,9 @@
     },
 
     _handleVerticalExpandedViewChanged(verticalExpanded) {
-      if (verticalExpanded) {
-        this._setVerticalOpened(true);
-        this.rebuild();
-      }
-
-      if(!verticalExpanded) {
-        this._setVerticalOpened(false);
-        this._handleResize();
-      }
+      this._setVerticalOpened(verticalExpanded);
+      if (verticalExpanded) this.rebuild();
+      else this._handleResize();
     },
     /**
      * Updates the selected item when the user taps on a nav item button.

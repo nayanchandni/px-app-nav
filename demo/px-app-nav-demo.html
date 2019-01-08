@@ -266,11 +266,7 @@ limitations under the License.
       var div = this.$$('#wrapper');
       if(vertical) {
         div.style.top = '10px';
-        if(verticalExpanded) {
-          div.style.left = '350px';
-        } else {
-          div.style.left = '90px';
-        }
+        div.style.left = verticalExpanded ? '350px' : '90px';
       } else {
         div.style.top = '20px';
         div.style.left = '10px';
